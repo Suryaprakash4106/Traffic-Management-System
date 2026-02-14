@@ -62,8 +62,7 @@ const PORT = 3000;
 // -------------------- MongoDB connection --------------------
 async function connectDB() {
   try {
-    await mongoose.connect(
-  "mongodb+srv://enterprise_sop_user_admin:W7nEyDEOa6WIlvOc@enterprise-sop-agent.yig4pl9.mongodb.net/traffic_management?retryWrites=true&w=majority");
+    await mongoose.connect(process.env.MONGO_URI);
     console.log("MongoDB Atlas connected");
   } catch (err) {
     console.error("MongoDB connection error:", err);
