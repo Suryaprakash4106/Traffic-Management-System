@@ -6,9 +6,8 @@ require("dotenv").config({
 
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
-console.log("Loaded OpenAI key:", OPENAI_API_KEY);
+console.log("Environment variables loaded");
 console.log("GOOGLE ID:", process.env.GOOGLE_CLIENT_ID);
-console.log("GOOGLE SECRET:", process.env.GOOGLE_CLIENT_SECRET);
 console.log("ENV PATH CHECK");
 console.log("DIR:", __dirname);
 console.log("GOOGLE ID:", process.env.GOOGLE_CLIENT_ID);
