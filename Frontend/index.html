@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Traffic Management System</title>
+
+  <!-- Roboto Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 150vh;
+    }
+
+    /* Header */
+    header {
+      background: #111;
+      color: white;
+      padding: 40px 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      font-size: 35px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 60px;
+      font-size: 17px;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #d71653;
+    }
+
+    /* Login Button */
+    .login-btn {
+      margin-left: 25px;
+      padding: 7px 18px;
+      background: #ffff00;
+      color: black;
+      text-decoration: none;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* Main Content */
+    main {
+      flex: 1;
+      padding: 60px 40px;
+      text-align: center;
+      background: #f5f5f5;
+    }
+
+    main h2 {
+      font-size: 32px;
+      margin-bottom: 15px;
+    }
+
+    main p {
+      color: #555;
+      font-size: 16px;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    /* Footer */
+    footer {
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 50px;
+      font-size: 17px;
+    }
+
+    /* Overlay */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Role Selection */
+    .role-container {
+      text-align: center;
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      width: 360px;
+      animation: fadeIn 0.25s ease;
+    }
+
+    .role-box {
+      padding: 12px;
+      margin: 10px 0;
+      background: #f7f7f7;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.25s;
+      border: 1px solid #ddd;
+    }
+
+    .role-box:hover {
+      transform: scale(1.05);
+      background: white;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+      border-color: #d71653;
+    }
+
+    .role-box.selected {
+      background: #d71653;
+      color: white;
+      border-color: #d71653;
+    }
+
+    .next-btn {
+      margin-top: 18px;
+      background: #111;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 50px;
+      cursor: pointer;
+      display: inline-block;
+      transition: 0.3s;
+    }
+
+    .next-btn:hover {
+      background: #d71653;
+    }
+
+    /* Login Popup */
+    .login-popup {
+      display: none;
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      width: 360px;
+      animation: fadeIn 0.25s ease;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 15px;
+      background: #111;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #d71653;
+    }
+
+    .captcha-box {
+      margin-top: 12px;
+      background: #f1f1f1;
+      padding: 10px;
+      text-align: center;
+      font-weight: bold;
+      letter-spacing: 3px;
+      border-radius: 5px;
+    }
+
+    .create-account {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 13px;
+      color: #555;
+      cursor: pointer;
+    }
+
+    .create-account:hover {
+      color: #d71653;
+    }
+
+    @keyframes fadeIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Traffic Management System</h1>
+
+    <div style="display:flex; align-items:center;">
+      <nav>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Contact</a>
+      </nav>
+
+      <div class="login-btn" onclick="openRoles()">Login</div>
+    </div>
+  </header>
+
+  <main>
+    <h2>Welcome to My Website</h2>
+    <p>
+      This is a clean and simple website layout with a neat header and footer.
+      You can now add your own content, images, and pages.
+    </p>
+  </main>
+
+  <footer>
+    © 2026 Traffic Management System | All Rights Reserved.
+  </footer>
+
+  <!-- Overlay -->
+  <div class="overlay" id="overlay">
+
+    <!-- Role Selection -->
+    <div class="role-container" id="roleScreen">
+      <h3>Select Access Role</h3>
+
+      <div class="role-box" onclick="selectRole(this)">Traffic Police Officer</div>
+      <div class="role-box" onclick="selectRole(this)">Traffic Control Room Officer</div>
+      <div class="role-box" onclick="selectRole(this)">System Administrator</div>
+      <div class="role-box" onclick="selectRole(this)">City Transport Authority</div>
+
+      <div class="next-btn" onclick="openLogin()">Next ➜</div>
+    </div>
+
+    <!-- Login Popup -->
+    <div class="login-popup" id="loginScreen">
+      <h3>Official Login</h3>
+
+      <input type="text" placeholder="Username">
+      <input type="password" placeholder="Password">
+
+      <div class="captcha-box" id="captcha"></div>
+
+      <input type="text" placeholder="Enter CAPTCHA">
+
+      <button>Submit</button>
+
+      <div class="create-account">
+        Don't have an account? Create Account
+      </div>
+    </div>
+
+  </div>
+
+<script>
+function openRoles() {
+  document.getElementById("overlay").style.display = "flex";
+}
+
+function selectRole(el) {
+  document.querySelectorAll(".role-box").forEach(box => box.classList.remove("selected"));
+  el.classList.add("selected");
+}
+
+function openLogin() {
+  document.getElementById("roleScreen").style.display = "none";
+  document.getElementById("loginScreen").style.display = "block";
+  generateCaptcha();
+}
+
+function generateCaptcha() {
+  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  let captcha = "";
+  for (let i = 0; i < 6; i++) {
+    captcha += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  document.getElementById("captcha").innerText = captcha;
+}
+</script>
+
+</body>
+</html>

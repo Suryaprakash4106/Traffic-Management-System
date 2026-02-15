@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Account</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  background: #f4f6f8;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  background: white;
+  width: 400px;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  position: relative;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Buttons */
+.btn {
+  position: absolute;
+  bottom: 15px;
+  padding: 8px 18px;
+  border-radius: 50px;
+  cursor: pointer;
+  border: none;
+}
+
+.previous {
+  left: 15px;
+  background: #999;
+  color: white;
+}
+
+.create {
+  right: 15px;
+  background: #111;
+  color: white;
+}
+
+.create:hover {
+  background: #d71653;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h2>Create Account</h2>
+
+  <input type="text" placeholder="Full Name">
+  <input type="email" placeholder="Email ID">
+  <input type="password" placeholder="Password">
+
+  <select>
+    <option>Select District</option>
+    <option>Chennai</option>
+    <option>Coimbatore</option>
+    <option>Madurai</option>
+  </select>
+
+  <input type="text" placeholder="Area">
+  <input type="text" placeholder="Block / Zone">
+
+  <button class="btn previous" onclick="goBack()">Previous</button>
+  <button class="btn create" onclick="createAccount()">Create</button>
+
+</div>
+
+<script>
+function goBack() {
+  window.history.back();
+}
+
+function createAccount() {
+  window.location.href = "verification.html";
+}
+</script>
+
+</body>
+</html>

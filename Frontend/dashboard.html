@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  display: flex;
+  background: #f4f6f8;
+  transition: 0.3s;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 240px;
+  height: 100vh;
+  background: white;
+  border-right: 1px solid #ddd;
+  padding: 20px;
+  position: relative;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: #111;
+}
+
+.menu-item {
+  padding: 10px;
+  margin: 5px 0;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: 0.2s;
+}
+
+.menu-item:hover {
+  background: #f1f1f1;
+}
+
+.menu-item.active {
+  background: #111;
+  color: white;
+}
+
+/* Logout Button */
+.logout-btn {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  background: #111;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.logout-btn:hover {
+  background: #d71653;
+}
+
+/* Main */
+.main {
+  flex: 1;
+  padding: 25px;
+}
+
+/* Topbar */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.search {
+  width: 280px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.top-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dark-toggle {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  background: #111;
+  color: white;
+}
+
+.user {
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* Cards */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.card {
+  background: white;
+  padding: 18px;
+  border-radius: 10px;
+  box-shadow: 0 5px 12px rgba(0,0,0,0.05);
+}
+
+.card-title {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.card-value {
+  font-size: 26px;
+  font-weight: bold;
+}
+
+/* Panel */
+.panel {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 12px rgba(0,0,0,0.05);
+  height: 300px;
+}
+
+.panel-title {
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+/* ================= POPUP ================= */
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup {
+  width: 100%;
+  max-width: 420px;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  text-align: center;
+  animation: popupAnim 0.3s ease;
+}
+
+@keyframes popupAnim {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.popup-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.popup-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.popup-btn {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.exit {
+  background: #d71653;
+  color: white;
+}
+
+.cancel {
+  background: #ddd;
+}
+
+/* ================= DARK MODE ================= */
+
+body.dark {
+  background: #0f1115;
+  color: white;
+}
+
+body.dark .sidebar,
+body.dark .card,
+body.dark .panel {
+  background: #171a21;
+  color: white;
+}
+
+body.dark .menu-item.active {
+  background: #00c3ff;
+  color: black;
+}
+
+body.dark .dark-toggle {
+  background: #00c3ff;
+  color: black;
+}
+
+body.dark .search {
+  background: #0f1115;
+  border-color: #333;
+  color: white;
+}
+
+body.dark .popup {
+  background: #171a21;
+  color: white;
+}
+
+body.dark .cancel {
+  background: #222;
+  color: white;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <div class="logo">Traffic System</div>
+
+  <div class="menu-item active">Dashboard</div>
+  <div class="menu-item">Traffic Density</div>
+  <div class="menu-item">Signals</div>
+  <div class="menu-item">Emergency Vehicles</div>
+
+  <br>
+
+  <div class="menu-item">Reports</div>
+  <div class="menu-item">Alerts</div>
+  <div class="menu-item">Accident Zones</div>
+
+  <br>
+
+  <div class="menu-item">Settings</div>
+
+  <div class="logout-btn" onclick="openLogoutPopup()"> Logout</div>
+</div>
+
+<!-- Main -->
+<div class="main">
+
+  <div class="topbar">
+    <input class="search" type="text" placeholder="Search...">
+
+    <div class="top-right">
+      <button class="dark-toggle" onclick="toggleDarkMode()">☀️</button>
+      <div class="user" id="username"></div>
+    </div>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-title">Traffic Density</div>
+      <div class="card-value">78%</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Active Signals</div>
+      <div class="card-value">134</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Incidents Today</div>
+      <div class="card-value">12</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">System Status</div>
+      <div class="card-value">Normal</div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title">City Traffic Overview</div>
+  </div>
+
+</div>
+
+<!-- POPUP -->
+<div class="popup-overlay" id="logoutPopup">
+  <div class="popup">
+    <div class="popup-title">Confirm Logout?</div>
+
+    <div class="popup-buttons">
+      <button class="popup-btn exit" onclick="logout()">Exit</button>
+      <button class="popup-btn cancel" onclick="closeLogoutPopup()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script>
+
+function toggleDarkMode() {
+  document.body.classList.toggle("dark");
+}
+
+function openLogoutPopup() {
+  document.getElementById("logoutPopup").style.display = "flex";
+}
+
+function closeLogoutPopup() {
+  document.getElementById("logoutPopup").style.display = "none";
+}
+
+function logout() {
+  sessionStorage.clear();   // ✅ Session clear logic
+  localStorage.clear();     // optional but safe
+  window.location.href = "login.html";
+}
+
+</script>
+
+</body>
+</html>
