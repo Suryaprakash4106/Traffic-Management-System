@@ -16,12 +16,35 @@
 }
 
 body {
-  background: #f4f6f8;
+  margin: 0;
   height: 100vh;
+  background-image: url("bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
   display: flex;
   justify-content: center;
   align-items: center;
 }
+/* ===== Background Blur ===== */
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+
+  background-image: url("bg.jpg");  /* 👈 image name */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  filter: blur(2px);
+  transform: scale(1.05);
+
+  z-index: -1;
+}
+
 
 /* Login Box */
 .login-container {
@@ -106,10 +129,17 @@ button:hover {
 
   <button>Submit</button>
 
-  <div class="create-account">
-    Don't have an account? Create Account
-  </div>
+  <div class="create-account" onclick="openCreate()">
+  Don't have an account? Create Account
 </div>
+
+</div>
+
+<script>
+function openCreate() {
+   window.location.href = "create.html";
+}
+</script>
 
 <script>
 let generatedCaptcha = "";

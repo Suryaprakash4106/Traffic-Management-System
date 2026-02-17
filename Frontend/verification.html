@@ -16,11 +16,33 @@
 }
 
 body {
-  background: #f4f6f8;
+  margin: 0;
   height: 100vh;
+  background-image: url("bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
   display: flex;
   justify-content: center;
   align-items: center;
+}
+/* ===== Background Blur ===== */
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+
+  background-image: url("bg.jpg");  
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  filter: blur(2px);
+  transform: scale(1.05);
+
+  z-index: -1;
 }
 
 .container {
@@ -32,14 +54,16 @@ body {
   text-align: center;
 }
 
+/* ✅ Header கீழே வர spacing */
 h2 {
-  margin-bottom: 100px;
+  margin-top: 40px;
+  margin-bottom: 25px;
 }
 
 input {
   width: 100%;
   padding: 15px;
-  margin-top: 10px;
+  margin-top: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
@@ -47,12 +71,13 @@ input {
 button {
   width: 100%;
   padding: 10px;
-  margin-top: 10px;
+  margin-top: 18px;
   background: #111;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: 0.2s;
 }
 
 button:hover {
@@ -60,9 +85,9 @@ button:hover {
 }
 
 .note {
-  margin-top: 25px;
-  font-size: 15px;
+  font-size: 14px;
   color: #555;
+  margin-bottom: 10px;
 }
 </style>
 </head>
@@ -77,11 +102,26 @@ button:hover {
     OTP sent to your registered Email ID
   </p>
 
-  <input type="text" placeholder="Enter OTP">
+  <input type="text" id="otp" placeholder="Enter OTP">
 
-  <button>Verify OTP</button>
+  <button onclick="verifyOTP()">Verify</button>
 
 </div>
+
+<script>
+function verifyOTP() {
+
+   const otp = document.getElementById("otp").value;
+
+   /* ✅ Dummy Validation */
+   if (otp.trim() !== "") {
+      window.location.href = "dashboard.html";
+   } 
+   else {
+      alert("Please enter OTP");
+   }
+}
+</script>
 
 </body>
 </html>

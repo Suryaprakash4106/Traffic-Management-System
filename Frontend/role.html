@@ -15,21 +15,39 @@
   font-family: 'Roboto', sans-serif;
 }
 
+/* ===== Body Layout ===== */
 body {
-  background: #f4f6f8;
+  margin: 0;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
-/* Container */
+/* ===== Blurred Background ===== */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+
+  background-image: url("bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  filter: blur(2px);        /* 🔥 Adjust blur here */
+  transform: scale(1.05);
+  z-index: -1;
+}
+
+/* ===== Container ===== */
 .role-container {
-  background: white;
+  background: rgba(255, 255, 255, 0.95);
   padding: 30px;
   width: 380px;
   border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
   text-align: center;
   animation: fadeIn 0.25s ease;
 }
@@ -39,21 +57,21 @@ h2 {
   font-size: 20px;
 }
 
-/* Role Boxes */
+/* ===== Role Boxes ===== */
 .role-box {
   padding: 12px;
   margin: 10px 0;
-  background: #f7f7f7;
+  background: rgba(255,255,255,0.7);
   border-radius: 6px;
   cursor: pointer;
   transition: 0.25s;
-  border: 1px solid #ddd;
+  border: 1px solid rgba(0,0,0,0.1);
 }
 
 .role-box:hover {
   transform: scale(1.05);
   background: white;
-  box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.15);
   border-color: #d71653;
 }
 
@@ -64,7 +82,7 @@ h2 {
   font-weight: 500;
 }
 
-/* Next Button */
+/* ===== Next Button ===== */
 .next-btn {
   margin-top: 18px;
   background: #111;
@@ -79,8 +97,10 @@ h2 {
 
 .next-btn:hover {
   background: #d71653;
+  transform: scale(1.08);
 }
 
+/* ===== Animation ===== */
 @keyframes fadeIn {
   from { transform: scale(0.9); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
@@ -107,6 +127,9 @@ h2 {
 function selectRole(el) {
   document.querySelectorAll(".role-box").forEach(box => box.classList.remove("selected"));
   el.classList.add("selected");
+
+  /* Save role 🔥 IMPORTANT */
+  sessionStorage.setItem("role", el.innerText);
 }
 
 function goToLogin() {
