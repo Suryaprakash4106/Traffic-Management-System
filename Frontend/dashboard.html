@@ -64,10 +64,12 @@ body {
   background: #111;
   color: white;
   padding: 10px;
-  border-radius: 8px;
+  border-radius: 20px;
   text-align: center;
   cursor: pointer;
-  transition: 0.3s;
+  transition: 0.2s;
+  transform: scale(1.15);
+
 }
 
 .logout-btn:hover {
@@ -121,6 +123,7 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 15px;
   margin-bottom: 25px;
+  
 }
 
 .card {
@@ -128,16 +131,17 @@ body {
   padding: 18px;
   border-radius: 10px;
   box-shadow: 0 5px 12px rgba(0,0,0,0.05);
+  border-radius: 25px;
 }
 
 .card-title {
   font-size: 13px;
-  color: #666;
+  color: #130202;
   margin-bottom: 8px;
 }
 
 .card-value {
-  font-size: 26px;
+  font-size: 20px;
   font-weight: bold;
 }
 
@@ -253,6 +257,13 @@ body.dark .popup {
 body.dark .cancel {
   background: #222;
   color: white;
+}
+
+body.dark .logo {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: #ffffff;
 }
 
 </style>

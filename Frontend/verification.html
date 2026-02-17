@@ -46,18 +46,20 @@ body::before {
 }
 
 .container {
-  background: white;
+  background: transparent;
   width: 360px;
   padding: 25px;
-  border-radius: 10px;
+  border-radius: 20px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.15);
   text-align: center;
 }
 
-/* ✅ Header கீழே வர spacing */
+/* ✅ Header */
 h2 {
-  margin-top: 40px;
-  margin-bottom: 25px;
+  margin-top: 50px;
+  margin-bottom: 30px;
+  font-size: 30px;
+  color: rgb(250, 225, 1);
 }
 
 input {
@@ -65,28 +67,31 @@ input {
   padding: 15px;
   margin-top: 15px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 20px;
 }
 
 button {
   width: 100%;
-  padding: 10px;
+  padding: 15px;
   margin-top: 18px;
   background: #111;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 20px;
   cursor: pointer;
-  transition: 0.2s;
+  transition: 0.25s;
+  font-size: 15px;
+ 
 }
 
 button:hover {
   background: #d71653;
+   transform: scale(1.15);
 }
 
 .note {
-  font-size: 14px;
-  color: #555;
+  font-size: 15px;
+  color: #fbfbfb;
   margin-bottom: 10px;
 }
 </style>

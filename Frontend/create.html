@@ -3,12 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Create Account</title>
+<title>Register</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
-
 * {
   margin: 0;
   padding: 0;
@@ -16,102 +15,118 @@
   font-family: 'Roboto', sans-serif;
 }
 
+/* ===== Background ===== */
 body {
-  margin: 0;
   height: 100vh;
-  background-image: url("bg.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+  color: white;
 }
- /* ===== Background Blur ===== */
 
+/* ===== Blurred Background ===== */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
 
-  background-image: url("bg.jpg");  /* 👈 image name */
+  background-image: url("bg.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 
-  filter: blur(2px);
+  filter: blur(4px);
   transform: scale(1.05);
-
   z-index: -1;
 }
 
-
-/* FULL PAGE CONTAINER */
-.container {
-  width: 90%;
-  max-width: 900px;
-  background: white;
-  padding: 40px;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+/* ===== Invisible Container ===== */
+.register-container {
+  width: 480px;
+  padding: 10px;
+  background: transparent;
 }
 
+/* Header */
 h2 {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
+  font-weight: 525;
+  font-size: 35px;
+  color: rgb(250, 194, 8);
+  
 }
 
-/* GRID → 2 FIELDS PER ROW */
-.form-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-
-input {
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  width: 100%;
-}
-
-/* BUTTON AREA */
-.button-row {
-  margin-top: 40px;
-  display: flex;
-  justify-content: space-between;
-}
-
-/* BOX TYPE BUTTONS */
-.btn {
-  padding: 12px 28px;
-  border: none;
-  cursor: pointer;
+/* Labels */
+.label {
   font-size: 15px;
-  border-radius: 6px;
-  min-width: 120px;
+  margin-bottom: 4px;
+  display: block;
 }
 
-.previous {
-  background: #111;
+/* Rows */
+.input-row {
+  display: flex;
+  gap: 13px;
+  margin-bottom: 14px;
+  
+}
+
+.field {
+  flex: 1;
+}
+
+/* Inputs */
+input, select {
+  width: 100%;
+  padding: 13px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+
+  background: white;
+  color: black;
+  font-size: 13px;
+  
+}
+
+/* Button */
+.register-btn {
+  width: 100%;
+  padding: 20px;
+  margin-top: 8px;
+
+  border: none;
+  border-radius: 20px;
+  background: rgb(10, 10, 10);
+  color: rgb(250, 249, 249);
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.register-btn:hover {
+  background: #d71653;
   color: white;
+  transform: scale(1.15);
 }
 
-.next {
-  background: #111;
+/* Footer */
+.footer {
+  text-align: center;
+  margin-top: 14px;
+  font-size: 13px;
+}
+
+.footer a {
   color: white;
+  text-decoration: none;
+  font-weight: 500;
 }
 
-.previous:hover {
-  background: #0fa4ce;
-}
-.next:hover {
-  background: #0fa4ce;
-}
-.previous:hover,
-.next:hover {
-  transform: scale(1.1);
+.footer a:hover {
+  color: rgb(189, 6, 6);
 }
 
 </style>
@@ -119,114 +134,102 @@ input {
 
 <body>
 
-<div class="container">
+<div class="register-container">
 
-  <h2 id="createTitle">Create Account</h2>
+  <h2>Create Account</h2>
 
-  <!-- Dynamic Fields -->
-  <div class="form-grid" id="dynamicFields"></div>
+  <!-- Row 1 -->
+  <div class="input-row">
+    <div class="field">
+      <span class="label">First Name</span>
+      <input type="text">
+    </div>
 
-  <div class="button-row">
-      <button class="btn previous" onclick="goBack()">Previous</button>
-      <button class="btn next" onclick="createAccount()">Next</button>
+    <div class="field">
+      <span class="label">Last Name</span>
+      <input type="text">
+    </div>
+  </div>
+
+  <!-- Row 2 -->
+  <div class="input-row">
+    <div class="field">
+      <span class="label">Username</span>
+      <input type="text">
+    </div>
+
+    <div class="field">
+      <span class="label">Role</span>
+
+      <!-- ✅ DROPDOWN -->
+      <select id="roleSelect" onchange="updateFields()">
+        <option value="">Select Role</option>
+        <option>Traffic Police Officer</option>
+        <option>Traffic Control Room Officer</option>
+        <option>System Administrator</option>
+        <option>City Transport Authority</option>
+      </select>
+
+    </div>
+  </div>
+
+  <!-- Row 3 -->
+  <div class="input-row">
+    <div class="field">
+      <span class="label">Email</span>
+      <input type="email">
+    </div>
+
+    <div class="field">
+      <span class="label">Phone</span>
+      <input type="text">
+    </div>
+  </div>
+
+  <!-- Password -->
+  <div style="margin-bottom: 14px;">
+    <span class="label">Password</span>
+    <input type="password">
+  </div>
+
+  <div style="margin-bottom: 14px;">
+    <span class="label">Confirm Password</span>
+    <input type="password">
+  </div>
+
+  <button class="register-btn">Register</button>
+
+  <div class="footer">
+    Already have account? <a href="login.html">Login</a>
   </div>
 
 </div>
 
 <script>
-
-function goBack() {
-  window.history.back();
+function updateFields() {
+  const role = document.getElementById("roleSelect").value;
+  console.log("Selected Role:", role);
 }
 
-function createAccount() {
+function registerUser() {
+
+  const role = document.getElementById("roleSelect").value;
+
+  if (!role) {
+    alert("Please select a role");
+    return;
+  }
+
+  /* ✅ ROLE SAVE */
+  sessionStorage.setItem("role", role);
+
+  console.log("Saved Role:", role);
+
+  /* Next Page */
   window.location.href = "verification.html";
 }
-
-window.onload = function() {
-
-   const role = sessionStorage.getItem("role");
-   const container = document.getElementById("dynamicFields");
-   const title = document.getElementById("createTitle");
-
-   if(role === "Traffic Police Officer") {
-
-      title.innerText = "Traffic Police Officer Registration";
-
-      container.innerHTML = `
-         <input type="text" placeholder="Full Name">
-         <input type="text" placeholder="Officer ID">
-
-         <input type="text" placeholder="Badge Number">
-         <input type="text" placeholder="Station / Area">
-
-         <input type="password" placeholder="Password">
-         <input type="password" placeholder="Confirm Password">
-      `;
-   }
-
-   else if(role === "Traffic Control Room Officer") {
-
-      title.innerText = "Control Room Officer Registration";
-
-      container.innerHTML = `
-         <input type="text" placeholder="Full Name">
-         <input type="text" placeholder="Employee ID">
-
-         <input type="text" placeholder="Control Room Code">
-         <input type="text" placeholder="Department">
-
-         <input type="password" placeholder="Password">
-         <input type="password" placeholder="Confirm Password">
-      `;
-   }
-
-   else if(role === "System Administrator") {
-
-      title.innerText = "Administrator Registration";
-
-      container.innerHTML = `
-         <input type="text" placeholder="Full Name">
-         <input type="text" placeholder="Admin ID">
-
-         <input type="text" placeholder="Security Code">
-         <input type="text" placeholder="Access Level">
-
-         <input type="password" placeholder="Password">
-         <input type="password" placeholder="Confirm Password">
-      `;
-   }
-
-   else if(role === "City Transport Authority") {
-
-      title.innerText = "Authority Registration";
-
-      container.innerHTML = `
-         <input type="text" placeholder="Full Name">
-         <input type="text" placeholder="Authority ID">
-
-         <input type="text" placeholder="Department Code">
-         <input type="text" placeholder="Region">
-
-         <input type="password" placeholder="Password">
-         <input type="password" placeholder="Confirm Password">
-      `;
-   }
-
-   else {
-
-      container.innerHTML = `
-         <input type="text" placeholder="Full Name">
-         <input type="email" placeholder="Email ID">
-
-         <input type="password" placeholder="Password">
-         <input type="password" placeholder="Confirm Password">
-      `;
-   }
-
-}
-
 </script>
+
 
 </body>
 </html>
